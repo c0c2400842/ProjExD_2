@@ -5,7 +5,6 @@ import time
 import pygame as pg
 
 
-
 WIDTH, HEIGHT = 1100, 650
 #画面サイズ
 DELTA = { #カンマ忘れんな
@@ -15,6 +14,7 @@ DELTA = { #カンマ忘れんな
     pg.K_RIGHT: (+5,0),
 }
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
 
@@ -31,6 +31,8 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     if rct.top < 0 or HEIGHT < rct.bottom:
         tate = False
     return yoko, tate
+
+
 def game_over(screen:  pg.Surface) -> None:
     """
     引数:こうかとんRectと爆弾Rectの重なり情報
@@ -51,6 +53,7 @@ def game_over(screen:  pg.Surface) -> None:
     screen.blit(crying_kk_img, [800, 200])
     pg.display.update()
     time.sleep(5)
+
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
@@ -76,16 +79,6 @@ def main():
         
     # avx = vx*bb_accs[min(tmr//500, 9)]
     # bb_img = bb_img[min(tmr//500, 9)]    #TMRはタイマーです
-
-
-
-
-    
-    
-    
-
-
-
 
 
     clock = pg.time.Clock()
