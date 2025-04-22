@@ -1,6 +1,7 @@
 import os
 import random
 import sys
+import time
 import pygame as pg
 
 
@@ -25,11 +26,31 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
 
     yoko,tate = True, True  #ヨコタテ用の変数
     #横方向判定 
-    if rct.left < 0 or WIDTH <rct.right:  #もしも画面外だったら
+    if rct.left < 0 or WIDTH < rct.right:  #もしも画面外だったら
         yoko = False
     if rct.top < 0 or HEIGHT < rct.bottom:
         tate = False
     return yoko, tate
+def game_over(screen:  pg.Surface) -> None:
+    """
+    引数:こうかとんRectと爆弾Rectの重なり情報
+    戻り値:画像出力
+    画面内にはブラックアウトの画面とこうかとんx2とGameoverが表示
+    """
+
+    #ゲームオーバー画面の初期化
+    crying_kk_img = pg.image.load("fig/8.png")
+    fonto = pg.font.Font(None,80)
+    txt = fonto.render("Game Over",
+        True, (255, 255, 255))
+    bg_black = pg.Surface((WIDTH, HEIGHT))
+    bg_black.set_alpha(100)
+    screen.blit(bg_black, [0,0])#背景　ブラックスクリーン描画
+    screen.blit(txt, [400, 200])
+    screen.blit(crying_kk_img, [300, 200])
+    screen.blit(crying_kk_img, [800, 200])
+    pg.display.update()
+    time.sleep(5)
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
@@ -48,6 +69,14 @@ def main():
     vx, vy = +5, +5
 
 
+    
+    
+    
+
+
+
+
+
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -56,10 +85,23 @@ def main():
                 return
         screen.blit(bg_img, [0, 0]) #背景画像描画
 
-            #もしもこうかとんと爆弾Rectが重なっていたら
+            #もしもこうかとんと爆弾Rectが重なっていたら ゲームオーバー
         if kk_rct.colliderect(bb_rct):
-                print("Game Over")
-                return
+            game_over(screen) 
+                # print("Game Over")
+                
+
+                # screen.blit(bg_black, [0,0])#背景　ブラックスクリーン描画
+                # screen.blit(txt, [400, 200])
+                # screen.blit(crying_kk_img, [300, 200])
+                # screen.blit(crying_kk_img, [800, 200])
+                # pg.display.update()
+                # time.sleep(5)
+
+
+
+
+            return
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
         for key, mv in DELTA.items():
