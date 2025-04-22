@@ -68,6 +68,17 @@ def main():
     bb_rct.center = random.randint(0,WIDTH),random.randint(0,HEIGHT)
     vx, vy = +5, +5
 
+    #演習課題2途中
+    # bb_accs = [a for a in range(1, 11)]
+    # for r in range(1, 11):
+    #     bb_img = pg.Surface((20*r, 20*r))
+    #     pg.draw.circle(bb_img, (255, 0, 0), (10*r, 10*r), 10*r)
+        
+    # avx = vx*bb_accs[min(tmr//500, 9)]
+    # bb_img = bb_img[min(tmr//500, 9)]    #TMRはタイマーです
+
+
+
 
     
     
@@ -97,8 +108,6 @@ def main():
                 # screen.blit(crying_kk_img, [800, 200])
                 # pg.display.update()
                 # time.sleep(5)
-
-
 
 
             return
